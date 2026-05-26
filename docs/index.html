@@ -1,10 +1,691 @@
-﻿<!doctype html>
-<html>
+<!doctype html>
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <title>AI Lab Radar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Lab Daily Radar</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --ink: #14212b;
+      --muted: #607080;
+      --line: #dbe3ea;
+      --green: #0f766e;
+      --blue: #2563eb;
+      --amber: #a16207;
+      --red: #b42318;
+      --soft-green: #dff5ef;
+      --soft-blue: #e8f0ff;
+      --soft-amber: #fff3d6;
+      --soft-red: #ffe4e0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+    }
+    header {
+      background: linear-gradient(135deg, #102a43, #0f766e);
+      color: #fff;
+      padding: 34px 24px 26px;
+    }
+    main { max-width: 1380px; margin: 0 auto; padding: 24px 20px 48px; }
+    h1, h2, h3 { margin: 0 0 12px; line-height: 1.25; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 21px; margin-top: 26px; }
+    h3 { font-size: 16px; }
+    a { color: var(--green); text-decoration: none; }
+    .hero { max-width: 980px; font-size: 18px; color: #dbeafe; margin-top: 8px; }
+    .muted { color: var(--muted); }
+    .section, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    .kpis, .overview, .two-col, .alert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .kpi-value { font-size: 30px; font-weight: 800; }
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 2px 4px 2px 0;
+      white-space: nowrap;
+    }
+    .rel-high, .conf-high { background: var(--soft-green); color: var(--green); }
+    .rel-medium, .conf-medium { background: var(--soft-blue); color: var(--blue); }
+    .rel-low, .conf-low { background: #eef2f7; color: #475569; }
+    .sev-low { background: var(--soft-blue); color: var(--blue); }
+    .sev-medium { background: var(--soft-amber); color: var(--amber); }
+    .sev-high { background: var(--soft-red); color: var(--red); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid var(--line); padding: 8px; vertical-align: top; text-align: left; }
+    th { background: #edf2f7; white-space: nowrap; }
+    .overview ol { padding-left: 20px; margin-bottom: 0; }
+    .overview li { margin: 9px 0; }
+    .bar-row { display: grid; grid-template-columns: 220px 1fr 42px; gap: 10px; align-items: center; margin: 9px 0; }
+    .bar-track { height: 12px; background: #e5eaf0; border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--green); border-radius: 999px; }
+    .heatmap { display: grid; gap: 8px; }
+    .heat-row { display: grid; grid-template-columns: minmax(180px, 1.5fr) repeat(3, 80px); gap: 8px; align-items: center; }
+    .heat-cell { height: 28px; border-radius: 6px; background: #eef2f7; text-align: center; font-size: 12px; padding-top: 5px; color: #475569; }
+    .heat-1 { background: #dff5ef; color: #0f766e; }
+    .heat-2 { background: #a7e4d5; color: #075d55; }
+    .heat-3 { background: #5bc8b8; color: #064e49; }
+    .heat-4 { background: #0f766e; color: #ffffff; }
+    .mini-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  </style>
 </head>
 <body>
-  <h1>AI Lab Radar Test</h1>
+  <header>
+    <h1>AI Lab Daily Radar</h1>
+    <p>生成时间：2026-05-26 13:50:33 CST | GitHub Trending daily / weekly / monthly</p>
+    <p class="hero">今日雷达重点关注 Coding Agent Runtime，高相关项目包括 Lum1104/Understand-Anything、anthropics/knowledge-work-plugins、affaan-m/ECC。建议从矩阵项目中选择 1-2 个做可复现 PoC。</p>
+  </header>
+  <main>
+    <section class="kpis">
+      <div class="card">
+        <div class="kpi-value">30</div>
+        <h3>扫描项目</h3>
+        <p class="muted">daily / weekly / monthly</p>
+      </div>
+      <div class="card">
+        <div class="kpi-value">10</div>
+        <h3>雷达入选</h3>
+        <p class="muted">Top 6 相关性 + 榜单前二</p>
+      </div>
+      <div class="card">
+        <div class="kpi-value">23</div>
+        <h3>高相关</h3>
+        <p class="muted">可直接评估 PoC</p>
+      </div>
+      <div class="card">
+        <div class="kpi-value">21</div>
+        <h3>证据充分</h3>
+        <p class="muted">README / 结构 / 维护信号完整</p>
+      </div>
+      <div class="card">
+        <div class="kpi-value">2</div>
+        <h3>风险提醒</h3>
+        <p class="muted">仅真实安全敏感项</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>三榜单总览</h2>
+      <p class="muted">格式：可点击链接 /（技术关键词 &amp; 业务场景关键词）/ 相关性等级 / 可信度等级</p>
+      <div class="overview">
+        <div class="card">
+          <h3>今日</h3>
+          <ol>
+            <li>
+              <a href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a>
+              /（Coding Agent Runtime &amp; 企业知识库增强）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/anthropics/knowledge-work-plugins">anthropics/knowledge-work-plugins</a>
+              /（Plugin Directory &amp; 技能市场治理）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-medium">证据一般</span>
+            </li>
+            <li>
+              <a href="https://github.com/rohitg00/ai-engineering-from-scratch">rohitg00/ai-engineering-from-scratch</a>
+              /（Coding Agent Runtime &amp; 内容生产自动化）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-medium">证据一般</span>
+            </li>
+            <li>
+              <a href="https://github.com/affaan-m/ECC">affaan-m/ECC</a>
+              /（Coding Agent Runtime &amp; 技能市场治理）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills">mukul975/Anthropic-Cybersecurity-Skills</a>
+              /（Coding Agent Runtime &amp; 技能市场治理）
+              / <span class="badge rel-low">低相关</span>
+              / <span class="badge conf-medium">证据一般</span>
+            </li>
+            <li>
+              <a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a>
+              /（Coding Agent Runtime &amp; 企业知识库增强）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/manaflow-ai/cmux">manaflow-ai/cmux</a>
+              /（Coding Agent Runtime &amp; 需求-测试-上线自动化）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/multica-ai/andrej-karpathy-skills">multica-ai/andrej-karpathy-skills</a>
+              /（Coding Agent Runtime &amp; 企业知识库增强）
+              / <span class="badge rel-medium">可观察</span>
+              / <span class="badge conf-low">证据不足</span>
+            </li>
+            <li>
+              <a href="https://github.com/Fincept-Corporation/FinceptTerminal">Fincept-Corporation/FinceptTerminal</a>
+              /（Agent-Native CLI &amp; 金融行业方案模板）
+              / <span class="badge rel-medium">可观察</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/paperless-ngx/paperless-ngx">paperless-ngx/paperless-ngx</a>
+              /（Developer Runtime &amp; 内容生产自动化）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>周度</h3>
+          <ol>
+            <li>
+              <a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a>
+              /（Coding Agent Runtime &amp; 企业知识库增强）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/tinyhumansai/openhuman">tinyhumansai/openhuman</a>
+              /（Coding Agent Runtime &amp; 工具调用编排）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a>
+              /（Coding Agent Runtime &amp; 企业知识库增强）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/Imbad0202/academic-research-skills">Imbad0202/academic-research-skills</a>
+              /（Coding Agent Runtime &amp; 技能市场治理）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/rohitg00/ai-engineering-from-scratch">rohitg00/ai-engineering-from-scratch</a>
+              /（Coding Agent Runtime &amp; 内容生产自动化）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-medium">证据一般</span>
+            </li>
+            <li>
+              <a href="https://github.com/ruvnet/RuView">ruvnet/RuView</a>
+              /（Plugin Directory &amp; 安全合规观察）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/rohitg00/agentmemory">rohitg00/agentmemory</a>
+              /（Coding Agent Runtime &amp; Agent 持久记忆）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/CloakHQ/CloakBrowser">CloakHQ/CloakBrowser</a>
+              /（Browser Automation &amp; 浏览器自动化风险评估）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/supertone-inc/supertonic">supertone-inc/supertonic</a>
+              /（Developer Runtime &amp; 需求-测试-上线自动化）
+              / <span class="badge rel-medium">可观察</span>
+              / <span class="badge conf-medium">证据一般</span>
+            </li>
+            <li>
+              <a href="https://github.com/can1357/oh-my-pi">can1357/oh-my-pi</a>
+              /（Developer Runtime &amp; 工具调用编排）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>月度</h3>
+          <ol>
+            <li>
+              <a href="https://github.com/mattpocock/skills">mattpocock/skills</a>
+              /（Skill Pack &amp; 内容生产自动化）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-medium">证据一般</span>
+            </li>
+            <li>
+              <a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a>
+              /（Coding Agent Runtime &amp; 企业知识库增强）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/anthropics/financial-services">anthropics/financial-services</a>
+              /（Domain Agent Template &amp; 工具调用编排）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-medium">证据一般</span>
+            </li>
+            <li>
+              <a href="https://github.com/CloakHQ/CloakBrowser">CloakHQ/CloakBrowser</a>
+              /（Browser Automation &amp; 浏览器自动化风险评估）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/rohitg00/agentmemory">rohitg00/agentmemory</a>
+              /（Coding Agent Runtime &amp; Agent 持久记忆）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/Imbad0202/academic-research-skills">Imbad0202/academic-research-skills</a>
+              /（Coding Agent Runtime &amp; 技能市场治理）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/soxoj/maigret">soxoj/maigret</a>
+              /（Agent-Native CLI &amp; 需求-测试-上线自动化）
+              / <span class="badge rel-medium">可观察</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/TauricResearch/TradingAgents">TauricResearch/TradingAgents</a>
+              /（Agent-Native CLI &amp; 金融行业方案模板）
+              / <span class="badge rel-medium">可观察</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+            <li>
+              <a href="https://github.com/multica-ai/andrej-karpathy-skills">multica-ai/andrej-karpathy-skills</a>
+              /（Coding Agent Runtime &amp; 企业知识库增强）
+              / <span class="badge rel-medium">可观察</span>
+              / <span class="badge conf-low">证据不足</span>
+            </li>
+            <li>
+              <a href="https://github.com/AIDC-AI/Pixelle-Video">AIDC-AI/Pixelle-Video</a>
+              /（Workflow Skill Methodology &amp; 内容生产自动化）
+              / <span class="badge rel-high">高相关</span>
+              / <span class="badge conf-high">证据充分</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>AI Lab 重点雷达矩阵</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>榜单</th>
+            <th>Repository</th>
+            <th>相关性</th>
+            <th>可信度</th>
+            <th>命中方向</th>
+            <th>技术核心摘要（开发视角）</th>
+            <th>AI Lab 参考意义（产品视角）</th>
+            <th>Contributors / AI Code Agents</th>
+            <th>风险提示</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>今日</td>
+            <td><a href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-high">证据充分</span></td>
+            <td>Skills / Plugin 治理、Agent 训练框架、企业知识库 / RAG</td>
+            <td>Graphs that teach > graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ask questions about.</td>
+            <td>Coding Agent Runtime 的 docs 说明 对应 企业知识库增强（Skills / Plugin 治理、Agent 训练框架、企业知识库 / RAG）；可复现依据是 CLI、API、manifest、docs、plugin/AI agent mention、tests/CI；证据线索：Graphs that teach > graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ；建议：PoC。</td>
+            <td>
+              Top贡献者：Lum1104、berkcangumusisik、zhushen12580<br>
+              AI Agents：Claude Code、Codex、Cursor、Copilot、OpenCode
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>今日</td>
+            <td><a href="https://github.com/anthropics/knowledge-work-plugins">anthropics/knowledge-work-plugins</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-medium">证据一般</span></td>
+            <td>Skills / Plugin 治理、Agent 训练框架、企业知识库 / RAG</td>
+            <td>Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork # Knowledge Work Plugins Plugins that turn Claude into a specialist for your role, team, and company. Why Plugins Cowork lets you set the goal and Claude delivers finished, professional work.</td>
+            <td>Plugin Directory 的可复用能力 对应 技能市场治理（Skills / Plugin 治理、Agent 训练框架、企业知识库 / RAG）；可复现依据是 plugin/AI agent mention、tests/CI；证据线索：Open source repository of plugins primarily intended for knowledge workers to use in Claude Cowork # Knowledge Work Plug；建议：PoC。</td>
+            <td>
+              Top贡献者：mattpic-ant、bryan-anthropic、tobinsouth<br>
+              AI Agents：Claude Code
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>今日</td>
+            <td><a href="https://github.com/affaan-m/ECC">affaan-m/ECC</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-high">证据充分</span></td>
+            <td>Skills / Plugin 治理、Agent 训练框架、需求-测试-上线自动化</td>
+            <td>The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</td>
+            <td>Coding Agent Runtime 的 examples 样例 对应 技能市场治理（Skills / Plugin 治理、Agent 训练框架、需求-测试-上线自动化）；可复现依据是 API、manifest、examples、docs、plugin/AI agent mention、tests/CI、sandbox、benchmark；证据线索：The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development f；建议：PoC。</td>
+            <td>
+              Top贡献者：affaan-m、pangerlkr、dependabot[bot]<br>
+              AI Agents：Claude Code、Codex、Cursor、Copilot、OpenCode、MCP、Hermes
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>周度</td>
+            <td><a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-high">证据充分</span></td>
+            <td>代码库知识图谱、Agent 训练框架、企业知识库 / RAG</td>
+            <td>Pre-indexed code knowledge graph for Claude Code, Codex, Cursor, OpenCode, and Hermes Agent — fewer tokens, fewer tool calls, 100% local # CodeGraph ### Supercharge Claude Code, Cursor, Codex, OpenCode, and Hermes Agent with Semantic Code I Use npm instead (works on any version): CodeGraph bundles its own runtime — nothing to compile, no native build, works the same everywhere.</td>
+            <td>Coding Agent Runtime 的 docs 说明 对应 企业知识库增强（代码库知识图谱、Agent 训练框架、企业知识库 / RAG）；可复现依据是 API、manifest、docs、plugin/AI agent mention、tests/CI、benchmark；证据线索：Pre-indexed code knowledge graph for Claude Code, Codex, Cursor, OpenCode, and Hermes Agent — fewer tokens, fewer tool c；建议：PoC。</td>
+            <td>
+              Top贡献者：colbymchenry、omonien、andreinknv<br>
+              AI Agents：Claude Code、Codex、Cursor、OpenCode、MCP、Hermes
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>周度</td>
+            <td><a href="https://github.com/tinyhumansai/openhuman">tinyhumansai/openhuman</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-high">证据充分</span></td>
+            <td>Agent 训练框架、Skills / Plugin 治理、需求-测试-上线自动化</td>
+            <td>OpenHuman OpenHuman is your Personal AI super intelligence: local memory, managed services where needed, simple and powerful. Local + managed services, upfront:** OpenHuman stores its Memory Tree, Obsidian-style Markdown vault, workspace config, and local runtime state on your machine.</td>
+            <td>Coding Agent Runtime 的 examples 样例 对应 工具调用编排（Agent 训练框架、Skills / Plugin 治理、需求-测试-上线自动化）；可复现依据是 API、manifest、examples、docs、Docker/local deployment、tests/CI；证据线索：OpenHuman OpenHuman is your Personal AI super intelligence: local memory, managed services where needed, simple and powe；建议：PoC。</td>
+            <td>
+              Top贡献者：senamakel、graycyrus、github-actions[bot]<br>
+              AI Agents：未提及
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>周度</td>
+            <td><a href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-high">证据充分</span></td>
+            <td>Skills / Plugin 治理、Agent 训练框架、企业知识库 / RAG</td>
+            <td>Graphs that teach > graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ask questions about.</td>
+            <td>Coding Agent Runtime 的 docs 说明 对应 企业知识库增强（Skills / Plugin 治理、Agent 训练框架、企业知识库 / RAG）；可复现依据是 CLI、API、manifest、docs、plugin/AI agent mention、tests/CI；证据线索：Graphs that teach > graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ；建议：PoC。</td>
+            <td>
+              Top贡献者：Lum1104、berkcangumusisik、zhushen12580<br>
+              AI Agents：Claude Code、Codex、Cursor、Copilot、OpenCode
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>周度</td>
+            <td><a href="https://github.com/Imbad0202/academic-research-skills">Imbad0202/academic-research-skills</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-high">证据充分</span></td>
+            <td>Skills / Plugin 治理、需求-测试-上线自动化、Agent 训练框架</td>
+            <td>Install in 30 seconds** (Claude Code CLI / VS Code / JetBrains, v3.7.0+): Then try `/ars-plan` to walk through your paper structure via Socratic dialogue, or jump to Quick install for prerequisites and the traditional symlink flow. AI is your copilot, not the pilot.** This tool won't write your paper for you.</td>
+            <td>Coding Agent Runtime 的 examples 样例 对应 技能市场治理（Skills / Plugin 治理、需求-测试-上线自动化、Agent 训练框架）；可复现依据是 API、examples、docs、plugin/AI agent mention、tests/CI、benchmark；证据线索：Install in 30 seconds** (Claude Code CLI / VS Code / JetBrains, v3.7.0+): Then try `/ars-plan` to walk through your pape；建议：PoC。</td>
+            <td>
+              Top贡献者：Imbad0202、2023Anita、madtriceps<br>
+              AI Agents：Claude Code、Copilot
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>周度</td>
+            <td><a href="https://github.com/ruvnet/RuView">ruvnet/RuView</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-high">证据充分</span></td>
+            <td>Skills / Plugin 治理、需求-测试-上线自动化、Agent 训练框架</td>
+            <td>The system learns each environment locally using spiking neural networks that adapt in under 30 seconds, with multi-frequency mesh scanning across 6 WiFi channels that uses your neighbors' routers as free radar illuminators. Every measurement is cryptographically attested via an Ed25519 witness chain.</td>
+            <td>Plugin Directory 的 examples 样例 对应 安全合规观察（Skills / Plugin 治理、需求-测试-上线自动化、Agent 训练框架）；可复现依据是 API、manifest、examples、docs、tests/CI、benchmark；证据线索：The system learns each environment locally using spiking neural networks that adapt in under 30 seconds, with multi-freq；建议：PoC。</td>
+            <td>
+              Top贡献者：ruvnet、claude、dependabot[bot]<br>
+              AI Agents：未提及
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>月度</td>
+            <td><a href="https://github.com/mattpocock/skills">mattpocock/skills</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-medium">证据一般</span></td>
+            <td>Skills / Plugin 治理、代码库知识图谱、企业知识库 / RAG</td>
+            <td>Skills For Real Engineers My agent skills that I use every day to do real engineering - not vibe coding. These skills are designed to be small, easy to adapt, and composable.</td>
+            <td>Skill Pack 的 docs 说明 对应 内容生产自动化（Skills / Plugin 治理、代码库知识图谱、企业知识库 / RAG）；可复现依据是 docs、plugin/AI agent mention；证据线索：Skills For Real Engineers My agent skills that I use every day to do real engineering - not vibe coding. These skills ar；建议：PoC。</td>
+            <td>
+              Top贡献者：mattpocock、TESTPERSONAL<br>
+              AI Agents：Claude Code、Codex
+            </td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>月度</td>
+            <td><a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a></td>
+            <td><span class="badge rel-high">高相关</span></td>
+            <td><span class="badge conf-high">证据充分</span></td>
+            <td>代码库知识图谱、Agent 训练框架、企业知识库 / RAG</td>
+            <td>Pre-indexed code knowledge graph for Claude Code, Codex, Cursor, OpenCode, and Hermes Agent — fewer tokens, fewer tool calls, 100% local # CodeGraph ### Supercharge Claude Code, Cursor, Codex, OpenCode, and Hermes Agent with Semantic Code I Use npm instead (works on any version): CodeGraph bundles its own runtime — nothing to compile, no native build, works the same everywhere.</td>
+            <td>Coding Agent Runtime 的 docs 说明 对应 企业知识库增强（代码库知识图谱、Agent 训练框架、企业知识库 / RAG）；可复现依据是 API、manifest、docs、plugin/AI agent mention、tests/CI、benchmark；证据线索：Pre-indexed code knowledge graph for Claude Code, Codex, Cursor, OpenCode, and Hermes Agent — fewer tokens, fewer tool c；建议：PoC。</td>
+            <td>
+              Top贡献者：colbymchenry、omonien、andreinknv<br>
+              AI Agents：Claude Code、Codex、Cursor、OpenCode、MCP、Hermes
+            </td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="two-col">
+      <div class="section">
+        <h2>关键词热度排行</h2>
+        <div class="bar-row">
+          <span>Coding Agent Runtime</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+          <span class="muted">170</span>
+        </div>
+        <div class="bar-row">
+          <span>企业知识库增强</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 42%"></div></div>
+          <span class="muted">72</span>
+        </div>
+        <div class="bar-row">
+          <span>技能市场治理</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 32%"></div></div>
+          <span class="muted">54</span>
+        </div>
+        <div class="bar-row">
+          <span>内容生产自动化</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 25%"></div></div>
+          <span class="muted">43</span>
+        </div>
+        <div class="bar-row">
+          <span>工具调用编排</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 15%"></div></div>
+          <span class="muted">26</span>
+        </div>
+        <div class="bar-row">
+          <span>Plugin Directory</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 13%"></div></div>
+          <span class="muted">22</span>
+        </div>
+        <div class="bar-row">
+          <span>需求-测试-上线自动化</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 12%"></div></div>
+          <span class="muted">20</span>
+        </div>
+        <div class="bar-row">
+          <span>Agent-Native CLI</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 11%"></div></div>
+          <span class="muted">18</span>
+        </div>
+        <div class="bar-row">
+          <span>Developer Runtime</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 9%"></div></div>
+          <span class="muted">15</span>
+        </div>
+        <div class="bar-row">
+          <span>Agent 持久记忆</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 9%"></div></div>
+          <span class="muted">15</span>
+        </div>
+        <div class="bar-row">
+          <span>Browser Automation</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 9%"></div></div>
+          <span class="muted">15</span>
+        </div>
+        <div class="bar-row">
+          <span>浏览器自动化风险评估</span>
+          <div class="bar-track"><div class="bar-fill" style="width: 9%"></div></div>
+          <span class="muted">15</span>
+        </div>
+      </div>
+      <div class="section">
+        <h2>AI Lab 方向热力</h2>
+        <div class="heatmap">
+          <div class="heat-row muted"><strong>方向</strong><span>今日</span><span>周度</span><span>月度</span></div>
+          <div class="heat-row">
+            <strong>Agent 训练框架</strong>
+            <span class="heat-cell heat-4">8</span>
+            <span class="heat-cell heat-4">10</span>
+            <span class="heat-cell heat-4">8</span>
+          </div>
+          <div class="heat-row">
+            <strong>Skills / Plugin 治理</strong>
+            <span class="heat-cell heat-4">9</span>
+            <span class="heat-cell heat-4">7</span>
+            <span class="heat-cell heat-4">7</span>
+          </div>
+          <div class="heat-row">
+            <strong>代码库知识图谱</strong>
+            <span class="heat-cell heat-2">2</span>
+            <span class="heat-cell heat-2">2</span>
+            <span class="heat-cell heat-4">4</span>
+          </div>
+          <div class="heat-row">
+            <strong>企业知识库 / RAG</strong>
+            <span class="heat-cell heat-4">4</span>
+            <span class="heat-cell heat-3">3</span>
+            <span class="heat-cell heat-4">4</span>
+          </div>
+          <div class="heat-row">
+            <strong>数据安全 / 私有化</strong>
+            <span class="heat-cell heat-0">0</span>
+            <span class="heat-cell heat-1">1</span>
+            <span class="heat-cell heat-0">0</span>
+          </div>
+          <div class="heat-row">
+            <strong>资源池 / 工具调度</strong>
+            <span class="heat-cell heat-2">2</span>
+            <span class="heat-cell heat-2">2</span>
+            <span class="heat-cell heat-3">3</span>
+          </div>
+          <div class="heat-row">
+            <strong>需求-测试-上线自动化</strong>
+            <span class="heat-cell heat-4">5</span>
+            <span class="heat-cell heat-4">5</span>
+            <span class="heat-cell heat-4">4</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>跨榜单稳定性分析</h2>
+      <p class="muted">daily+weekly = 短期升温；weekly+monthly = 持续趋势；daily+weekly+monthly = 稳定趋势；monthly only = 长尾热度。</p>
+      <div class="mini-matrix">
+        <div class="card">
+          <h3>colbymchenry/codegraph</h3>
+          <p><span class="badge rel-medium">稳定趋势</span> 今日 + 周度 + 月度</p>
+        </div>
+        <div class="card">
+          <h3>CloakHQ/CloakBrowser</h3>
+          <p><span class="badge rel-medium">持续趋势</span> 周度 + 月度</p>
+        </div>
+        <div class="card">
+          <h3>Imbad0202/academic-research-skills</h3>
+          <p><span class="badge rel-medium">持续趋势</span> 周度 + 月度</p>
+        </div>
+        <div class="card">
+          <h3>Lum1104/Understand-Anything</h3>
+          <p><span class="badge rel-medium">短期升温</span> 今日 + 周度</p>
+        </div>
+        <div class="card">
+          <h3>multica-ai/andrej-karpathy-skills</h3>
+          <p><span class="badge rel-medium">跨榜单出现</span> 今日 + 月度</p>
+        </div>
+        <div class="card">
+          <h3>rohitg00/agentmemory</h3>
+          <p><span class="badge rel-medium">持续趋势</span> 周度 + 月度</p>
+        </div>
+        <div class="card">
+          <h3>rohitg00/ai-engineering-from-scratch</h3>
+          <p><span class="badge rel-medium">短期升温</span> 今日 + 周度</p>
+        </div>
+        <div class="card">
+          <h3>AIDC-AI/Pixelle-Video</h3>
+          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
+        </div>
+        <div class="card">
+          <h3>TauricResearch/TradingAgents</h3>
+          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
+        </div>
+        <div class="card">
+          <h3>anthropics/financial-services</h3>
+          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
+        </div>
+        <div class="card">
+          <h3>mattpocock/skills</h3>
+          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
+        </div>
+        <div class="card">
+          <h3>soxoj/maigret</h3>
+          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="two-col">
+      <div class="section">
+        <h2>历史趋势</h2>
+        <h3>历史不足</h3>
+        <p>历史样本少于 7 天，当前仅展示今日快照，不做趋势判断。</p>
+      </div>
+      <div class="section">
+        <h2>今日热点分布</h2>
+        <span class="badge rel-medium">Skills / Plugin 治理 · 9</span>
+        <span class="badge rel-medium">Agent 训练框架 · 8</span>
+        <span class="badge rel-medium">需求-测试-上线自动化 · 5</span>
+        <span class="badge rel-medium">企业知识库 / RAG · 4</span>
+        <span class="badge rel-medium">代码库知识图谱 · 2</span>
+        <span class="badge rel-medium">资源池 / 工具调度 · 2</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>风险提醒</h2>
+      <div class="alert-grid">
+        <div class="card">
+          <h3><a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills">mukul975/Anthropic-Cybersecurity-Skills</a></h3>
+          <p><span class="badge sev-high">高</span> 恶意软件相关；OSINT 信息收集相关，需限定合规用途</p>
+          <p class="muted">malware、osint</p>
+        </div>
+        <div class="card">
+          <h3><a href="https://github.com/soxoj/maigret">soxoj/maigret</a></h3>
+          <p><span class="badge sev-low">低</span> OSINT 信息收集相关，需限定合规用途</p>
+          <p class="muted">osint</p>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
