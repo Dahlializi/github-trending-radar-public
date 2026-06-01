@@ -33,13 +33,13 @@
       color: #fff;
       padding: 30px 24px 24px;
     }
-    main { max-width: 1380px; margin: 0 auto; padding: 24px 20px 48px; }
+    main { max-width: 1240px; margin: 0 auto; padding: 24px 18px 48px; }
     h1, h2, h3 { margin: 0 0 12px; line-height: 1.25; }
     h1 { font-size: 32px; }
     h2 { font-size: 21px; margin-top: 26px; }
     h3 { font-size: 16px; }
     a { color: var(--green); text-decoration: none; }
-    .header-grid { max-width: 1380px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: start; }
+    .header-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: start; }
     .hero { max-width: 860px; font-size: 18px; color: #dbeafe; margin-top: 8px; }
     .generated { color: #cbd5e1; margin: 8px 0 0; }
     .header-kpis { display: grid; grid-template-columns: repeat(4, 88px); gap: 10px; }
@@ -47,6 +47,7 @@
     .header-kpi strong { display: block; font-size: 22px; line-height: 1; }
     .header-kpi span { display: block; margin-top: 6px; font-size: 12px; color: #dbeafe; }
     .muted { color: var(--muted); }
+    .section-note { margin: -4px 0 14px; color: var(--muted); font-size: 13px; }
     .section, .card {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -74,19 +75,46 @@
     .sev-low { background: var(--soft-blue); color: var(--blue); }
     .sev-medium { background: var(--soft-amber); color: var(--amber); }
     .sev-high { background: var(--soft-red); color: var(--red); }
+    .language-tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+      background: #eef2f7;
+      color: #475569;
+      white-space: nowrap;
+    }
+    .lang-python { background: #e8f1ff; color: #24548f; }
+    .lang-javascript { background: #fff4cc; color: #7a5a00; }
+    .lang-typescript, .lang-type-script { background: #ede9fe; color: #5b21b6; }
+    .lang-java { background: #ffe8e1; color: #8a351f; }
+    .lang-jupyter-notebook { background: #fff0df; color: #9a4f00; }
+    .lang-markdown { background: #edf2f7; color: #334155; }
+    .lang-go { background: #e6fbff; color: #0b6470; }
+    .lang-rust { background: #fff0e6; color: #8a3b12; }
+    .lang-html { background: #ffe9df; color: #9a3412; }
+    .lang-shell { background: #e9f8ef; color: #166534; }
+    .lang-cplusplus, .lang-cplusplusplus { background: #ede9fe; color: #5b21b6; }
+    .repo-title { font-weight: 700; overflow-wrap: anywhere; }
+    .repo-language { margin-top: 6px; }
+    .repo-keywords, .repo-metrics { margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .repo-metrics { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+    .metric { color: #315365; white-space: nowrap; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th, td { border: 1px solid var(--line); padding: 8px; vertical-align: top; text-align: left; }
     th { background: #edf2f7; white-space: nowrap; }
     .matrix-table { table-layout: fixed; font-size: 12.5px; }
     .matrix-table th, .matrix-table td { padding: 7px 8px; line-height: 1.45; }
     .matrix-table .col-period { width: 5.5%; }
-    .matrix-table .col-repo { width: 18%; }
-    .matrix-table .col-score { width: 6.5%; }
-    .matrix-table .col-directions { width: 22%; }
-    .matrix-table .col-summary { width: 20.75%; }
-    .matrix-table td:nth-child(5) { color: #315365; }
+    .matrix-table .col-repo { width: 21%; }
+    .matrix-table .col-count { width: 8%; }
+    .matrix-table .col-summary { width: 28.75%; }
+    .matrix-table tr.cross-period-row td { background: #eef7ff; }
+    .matrix-table td:nth-child(5), .matrix-table td:nth-child(6) { color: #315365; }
     .overview ol { padding-left: 20px; margin-bottom: 0; }
-    .overview li { margin: 9px 0; }
+    .overview li { margin: 11px 0; }
     .bar-row { display: grid; grid-template-columns: 220px 1fr 42px; gap: 10px; align-items: center; margin: 9px 0; }
     .bar-track { height: 12px; background: #e5eaf0; border-radius: 999px; overflow: hidden; }
     .bar-fill { height: 100%; background: var(--green); border-radius: 999px; }
@@ -102,6 +130,41 @@
       .header-grid { grid-template-columns: 1fr; }
       .header-kpis { grid-template-columns: repeat(2, 1fr); }
     }
+    @media (max-width: 760px) {
+      header { padding: 22px 16px 18px; }
+      main { padding: 14px 12px 32px; }
+      h1 { font-size: 26px; }
+      h2 { font-size: 19px; }
+      .hero { font-size: 16px; }
+      .section, .card { padding: 14px; }
+      .matrix-table, .matrix-table tbody, .matrix-table tr, .matrix-table td { display: block; width: 100%; }
+      .matrix-table colgroup, .matrix-table thead { display: none; }
+      .matrix-table tr {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin: 12px 0;
+        overflow: hidden;
+        background: #fff;
+      }
+      .matrix-table tr.cross-period-row { background: #eef7ff; }
+      .matrix-table tr.cross-period-row td { background: transparent; }
+      .matrix-table td {
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: 92px minmax(0, 1fr);
+        gap: 10px;
+        padding: 9px 10px;
+      }
+      .matrix-table td:last-child { border-bottom: 0; }
+      .matrix-table td::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .heat-row { grid-template-columns: minmax(110px, 1fr) repeat(3, 42px); gap: 6px; }
+      .bar-row { grid-template-columns: 120px 1fr 34px; }
+    }
   </style>
 </head>
 <body>
@@ -109,8 +172,8 @@
     <div class="header-grid">
       <div>
         <h1>AI Lab Daily Radar</h1>
-        <p class="generated">生成时间：2026-06-01 10:40:05 CST | GitHub Trending daily / weekly / monthly</p>
-        <p class="hero">今日 top_matrix_repos 聚焦内容生产自动化与 agent memory，凸显了 Agent-Native CLI 在工具调度中的高相关性。最强 AI Lab 信号指向结合 CLI 与 agent memory 的自动化 PoC 落地探索。</p>
+        <p class="generated">生成时间：2026-06-01 15:25:20 CST | GitHub Trending daily / weekly / monthly</p>
+        <p class="hero">今日top matrix repositories聚焦内容生产自动化与agent memory，展现出Agent-Native CLI的强劲AI Lab信号。这些高相关项目通过资源池调度，为自动化工作流提供了明确的PoC建议。</p>
       </div>
       <div class="header-kpis">
         <div class="header-kpi">
@@ -135,13 +198,13 @@
   <main>
     <section class="section">
       <h2>AI Lab 重点雷达矩阵</h2>
+      <p class="section-note">按 AI Lab 方向相关性与工程复用性筛选；排序优先日榜、周榜、月榜，跨榜单项目以淡蓝底突出。</p>
       <table class="matrix-table">
         <colgroup>
           <col class="col-period">
           <col class="col-repo">
-          <col class="col-score">
-          <col class="col-score">
-          <col class="col-directions">
+          <col class="col-count">
+          <col class="col-count">
           <col class="col-summary">
           <col class="col-summary">
         </colgroup>
@@ -149,85 +212,116 @@
           <tr>
             <th>榜单</th>
             <th>Repository</th>
-            <th>相关性</th>
-            <th>可信度</th>
-            <th>命中方向</th>
+            <th>GitHub收藏数</th>
+            <th>仓库复用数</th>
             <th>技术核心摘要（开发视角）</th>
             <th>AI Lab 参考意义（产品视角）</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>今日</td>
-            <td><a href="https://github.com/harry0703/MoneyPrinterTurbo">harry0703/MoneyPrinterTurbo</a></td>
-            <td><span class="badge rel-high">高相关</span></td>
-            <td><span class="badge conf-high">证据充分</span></td>
-            <td>资源池 / 工具调度、需求-测试-上线自动化、Agent 训练框架</td>
-            <td>基于Python与MoviePy的自动化短视频生成框架，集成大语言模型，提供Web与API接口，支持脚本与视频合成。</td>
-            <td>适用于自媒体短视频自动化生产场景，其大模型脚本生成与视频剪辑流水线可作为AI Lab多媒体内容生成业务的复用组件。</td>
+          <tr class="cross-period-row">
+            <td data-label="榜单">今日</td>
+            <td data-label="Repository">
+              <a class="repo-title" href="https://github.com/harry0703/MoneyPrinterTurbo">harry0703/MoneyPrinterTurbo</a>
+              <div class="repo-language">
+                <span class="language-tag lang-python">Python</span>
+              </div>
+            </td>
+            <td data-label="GitHub收藏数" class="metric">★ 75.5k</td>
+            <td data-label="仓库复用数" class="metric">Fork 10.7k</td>
+            <td data-label="技术核心摘要">基于Python与MoviePy的自动化视频生成框架，集成大模型API，提供Web与API接口，支持Docker部署及CLI调用。</td>
+            <td data-label="AI Lab 参考意义">面向自媒体营销场景实现文案到视频的一键生产，其大模型调度与视频合成管线可作为AI Lab内容生成业务的复用组件。</td>
           </tr>
           <tr>
-            <td>今日</td>
-            <td><a href="https://github.com/nesquena/hermes-webui">nesquena/hermes-webui</a></td>
-            <td><span class="badge rel-high">高相关</span></td>
-            <td><span class="badge conf-high">证据充分</span></td>
-            <td>Skills / Plugin 治理、Agent 训练框架、数据安全 / 私有化</td>
-            <td>面向Hermes agent的跨端WebUI框架，支持通过API进行多端交互与界面渲染。</td>
-            <td>适用于AI Lab构建多端智能助手应用，可复用其移动端与Web端的对话界面及交互组件。</td>
+            <td data-label="榜单">今日</td>
+            <td data-label="Repository">
+              <a class="repo-title" href="https://github.com/nesquena/hermes-webui">nesquena/hermes-webui</a>
+              <div class="repo-language">
+                <span class="language-tag lang-python">Python</span>
+              </div>
+            </td>
+            <td data-label="GitHub收藏数" class="metric">★ 10.3k</td>
+            <td data-label="仓库复用数" class="metric">Fork 1.4k</td>
+            <td data-label="技术核心摘要">提供Hermes Agent的Web与移动端前端交互框架，封装智能体API调用，作为多端适配的开发者参考实现。</td>
+            <td data-label="AI Lab 参考意义">面向Web与手机端的智能体访问应用，可复用其多端对话交互组件，赋能AI Lab的Agent产品化与移动端场景落地。</td>
           </tr>
           <tr>
-            <td>今日</td>
-            <td><a href="https://github.com/EveryInc/compound-engineering-plugin">EveryInc/compound-engineering-plugin</a></td>
-            <td><span class="badge rel-high">高相关</span></td>
-            <td><span class="badge conf-high">证据充分</span></td>
-            <td>Skills / Plugin 治理、需求-测试-上线自动化、Agent 训练框架</td>
-            <td>该项目是适配Cursor等工具的官方Compound Engineering plugin，提供AI技能与agent扩展框架。</td>
-            <td>面向AI辅助编程场景，AI Lab可复用其工程化组件，提升代码生成与多agent协同开发效率。</td>
+            <td data-label="榜单">今日</td>
+            <td data-label="Repository">
+              <a class="repo-title" href="https://github.com/EveryInc/compound-engineering-plugin">EveryInc/compound-engineering-plugin</a>
+              <div class="repo-language">
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
+            </td>
+            <td data-label="GitHub收藏数" class="metric">★ 18.8k</td>
+            <td data-label="仓库复用数" class="metric">Fork 1.4k</td>
+            <td data-label="技术核心摘要">面向Claude Code与Cursor的官方Compound Engineering plugin，提供AI技能与agent集成框架。</td>
+            <td data-label="AI Lab 参考意义">赋能研发团队在主流AI IDE中复用复合工程能力，提升代码生成效率，可作为AI Lab编码辅助工具链的标准化扩展组件。</td>
+          </tr>
+          <tr class="cross-period-row">
+            <td data-label="榜单">今日</td>
+            <td data-label="Repository">
+              <a class="repo-title" href="https://github.com/microsoft/markitdown">microsoft/markitdown</a>
+              <div class="repo-language">
+                <span class="language-tag lang-python">Python</span>
+              </div>
+            </td>
+            <td data-label="GitHub收藏数" class="metric">★ 136k</td>
+            <td data-label="仓库复用数" class="metric">Fork 9.3k</td>
+            <td data-label="技术核心摘要">基于Python的文档解析工具，将Office和PDF等转为Markdown，提供API以支持LangChain等RAG框架集成。</td>
+            <td data-label="AI Lab 参考意义">适用于企业知识库构建，作为AI Lab数据预处理plugin，提升非结构化文档在vector search与agent memory中的利用率。</td>
+          </tr>
+          <tr class="cross-period-row">
+            <td data-label="榜单">周度</td>
+            <td data-label="Repository">
+              <a class="repo-title" href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a>
+              <div class="repo-language">
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
+            </td>
+            <td data-label="GitHub收藏数" class="metric">★ 47.8k</td>
+            <td data-label="仓库复用数" class="metric">Fork 3.9k</td>
+            <td data-label="技术核心摘要">本项目构建code graph与knowledge graph，支持CLI接入，为代码分析提供图计算框架。</td>
+            <td data-label="AI Lab 参考意义">适用于企业代码库分析与业务知识沉淀，AI Lab可复用其图搜索能力，结合RAG提升辅助编程场景效率。</td>
           </tr>
           <tr>
-            <td>今日</td>
-            <td><a href="https://github.com/microsoft/markitdown">microsoft/markitdown</a></td>
-            <td><span class="badge rel-high">高相关</span></td>
-            <td><span class="badge conf-high">证据充分</span></td>
-            <td>Skills / Plugin 治理、资源池 / 工具调度、Agent 训练框架</td>
-            <td>基于Python的文档转Markdown工具，提供CLI与API，支持多格式解析，易集成至LangChain等框架。</td>
-            <td>适用于RAG场景的文档预处理，将非结构化数据转为大模型易读格式，可作为AI Lab知识库构建与agent memory管理的标准化plugin。</td>
+            <td data-label="榜单">周度</td>
+            <td data-label="Repository">
+              <a class="repo-title" href="https://github.com/affaan-m/ECC">affaan-m/ECC</a>
+              <div class="repo-language">
+                <span class="language-tag lang-javascript">JavaScript</span>
+              </div>
+            </td>
+            <td data-label="GitHub收藏数" class="metric">★ 201.1k</td>
+            <td data-label="仓库复用数" class="metric">Fork 30.9k</td>
+            <td data-label="技术核心摘要">面向编码助手的智能体性能优化框架，集成MCP协议与agent memory，提供技能调度与安全控制等底层开发参考。</td>
+            <td data-label="AI Lab 参考意义">适用于AI辅助编程场景的生产力提升方案，其研究优先的开发模式与智能体行为约束机制可作为AI Lab构建内部编码工具的复用组件。</td>
+          </tr>
+          <tr class="cross-period-row">
+            <td data-label="榜单">周度</td>
+            <td data-label="Repository">
+              <a class="repo-title" href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a>
+              <div class="repo-language">
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
+            </td>
+            <td data-label="GitHub收藏数" class="metric">★ 35.9k</td>
+            <td data-label="仓库复用数" class="metric">Fork 2.2k</td>
+            <td data-label="技术核心摘要">提供预索引的code graph与knowledge graph，为AI编程代理构建本地上下文，降低token与工具调用。</td>
+            <td data-label="AI Lab 参考意义">赋能AI Lab的自动化研发场景，其本地化索引机制可作为plugin集成至内部代码平台，复用图谱能力以提升大模型代码理解与生成效率。</td>
           </tr>
           <tr>
-            <td>周度</td>
-            <td><a href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a></td>
-            <td><span class="badge rel-high">高相关</span></td>
-            <td><span class="badge conf-high">证据充分</span></td>
-            <td>Skills / Plugin 治理、Agent 训练框架、企业知识库 / RAG</td>
-            <td>将源码转化为交互式code graph与knowledge graph，通过CLI对接AI助手，提供代码探索的图分析框架。</td>
-            <td>面向AI Lab的代码分析与业务知识沉淀场景，可复用图检索能力构建RAG应用，辅助团队理解复杂逻辑并提升效能。</td>
-          </tr>
-          <tr>
-            <td>周度</td>
-            <td><a href="https://github.com/affaan-m/ECC">affaan-m/ECC</a></td>
-            <td><span class="badge rel-high">高相关</span></td>
-            <td><span class="badge conf-high">证据充分</span></td>
-            <td>Skills / Plugin 治理、Agent 训练框架、需求-测试-上线自动化</td>
-            <td>该代理优化框架基于MCP与agent memory机制，为开发工具提供技能与安全扩展支撑。</td>
-            <td>适用于辅助研发场景，其技能plugin与记忆模块可复用于内部工具，提升AI Lab的工程生产力。</td>
-          </tr>
-          <tr>
-            <td>周度</td>
-            <td><a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a></td>
-            <td><span class="badge rel-high">高相关</span></td>
-            <td><span class="badge conf-high">证据充分</span></td>
-            <td>代码库知识图谱、Agent 训练框架、企业知识库 / RAG</td>
-            <td>构建本地code graph与knowledge graph，降低AI代理的token及工具调用，优化上下文检索。</td>
-            <td>适用于AI Lab代码库智能化改造，复用其本地索引方案，为自研助手或RAG系统提供低延迟且保护隐私的语义理解能力。</td>
-          </tr>
-          <tr>
-            <td>月度</td>
-            <td><a href="https://github.com/anthropics/financial-services">anthropics/financial-services</a></td>
-            <td><span class="badge rel-high">高相关</span></td>
-            <td><span class="badge conf-medium">证据一般</span></td>
-            <td>Skills / Plugin 治理、Agent 训练框架、资源池 / 工具调度</td>
-            <td>提供金融领域参考智能体框架，封装标准化技能与数据连接器，支撑开发者构建复杂业务流。</td>
-            <td>聚焦投行、股权研究、私募及财富管理场景，其沉淀的行业工作流与数据连接组件可直接复用于AI Lab金融业务。</td>
+            <td data-label="榜单">月度</td>
+            <td data-label="Repository">
+              <a class="repo-title" href="https://github.com/anthropics/financial-services">anthropics/financial-services</a>
+              <div class="repo-language">
+                <span class="language-tag lang-python">Python</span>
+              </div>
+            </td>
+            <td data-label="GitHub收藏数" class="metric">★ 29.2k</td>
+            <td data-label="仓库复用数" class="metric">Fork 4.1k</td>
+            <td data-label="技术核心摘要">金融服务参考agent框架，封装数据连接器与技能编排，提供API集成标准。</td>
+            <td data-label="AI Lab 参考意义">覆盖投行、股权研究与财富管理场景，其数据连接器与业务技能可复用于内部金融AI应用。</td>
           </tr>
         </tbody>
       </table>
@@ -235,70 +329,99 @@
 
     <section class="section">
       <h2>三榜单总览</h2>
-      <p class="muted">格式：可点击链接 /（技术关键词 &amp; 业务场景关键词）/ 相关性等级 / 可信度等级</p>
       <div class="overview">
         <div class="card">
           <h3>今日</h3>
           <ol>
             <li>
-              <a href="https://github.com/harry0703/MoneyPrinterTurbo">harry0703/MoneyPrinterTurbo</a>
-              /（Agent-Native CLI &amp; 内容生产自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/harry0703/MoneyPrinterTurbo">harry0703/MoneyPrinterTurbo</a>
+              <div class="repo-keywords">Agent-Native CLI / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 75.5k</span>
+                <span class="metric">Fork 10.7k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/microsoft/markitdown">microsoft/markitdown</a>
-              /（Plugin Directory &amp; 内容生产自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/microsoft/markitdown">microsoft/markitdown</a>
+              <div class="repo-keywords">Plugin Directory / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 136k</span>
+                <span class="metric">Fork 9.3k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/D4Vinci/Scrapling">D4Vinci/Scrapling</a>
-              /（Browser Automation &amp; 内容生产自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/D4Vinci/Scrapling">D4Vinci/Scrapling</a>
+              <div class="repo-keywords">Browser Automation / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 57.1k</span>
+                <span class="metric">Fork 5.5k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/nesquena/hermes-webui">nesquena/hermes-webui</a>
-              /（Developer Runtime &amp; Agent 持久记忆）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/nesquena/hermes-webui">nesquena/hermes-webui</a>
+              <div class="repo-keywords">Developer Runtime / Agent 持久记忆</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 10.3k</span>
+                <span class="metric">Fork 1.4k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/EveryInc/compound-engineering-plugin">EveryInc/compound-engineering-plugin</a>
-              /（Coding Agent Runtime &amp; 企业知识库增强）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/EveryInc/compound-engineering-plugin">EveryInc/compound-engineering-plugin</a>
+              <div class="repo-keywords">Coding Agent Runtime / 企业知识库增强</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 18.8k</span>
+                <span class="metric">Fork 1.4k</span>
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/github/docs">github/docs</a>
-              /（Developer Runtime &amp; 需求-测试-上线自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/github/docs">github/docs</a>
+              <div class="repo-keywords">Developer Runtime / 需求-测试-上线自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 19.8k</span>
+                <span class="metric">Fork 67.3k</span>
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/OpenBMB/VoxCPM">OpenBMB/VoxCPM</a>
-              /（Agent-Native CLI &amp; 工具调用编排）
-              / <span class="badge rel-medium">可观察</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/OpenBMB/VoxCPM">OpenBMB/VoxCPM</a>
+              <div class="repo-keywords">Agent-Native CLI / 工具调用编排</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 23.8k</span>
+                <span class="metric">Fork 2.7k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/revfactory/harness">revfactory/harness</a>
-              /（Skill Pack &amp; 需求-测试-上线自动化）
-              / <span class="badge rel-medium">可观察</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/revfactory/harness">revfactory/harness</a>
+              <div class="repo-keywords">Skill Pack / 需求-测试-上线自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 4.8k</span>
+                <span class="metric">Fork 660</span>
+                <span class="language-tag lang-html">HTML</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/FareedKhan-dev/train-llm-from-scratch">FareedKhan-dev/train-llm-from-scratch</a>
-              /（gemini &amp; Agent 持久记忆）
-              / <span class="badge rel-medium">可观察</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/FareedKhan-dev/train-llm-from-scratch">FareedKhan-dev/train-llm-from-scratch</a>
+              <div class="repo-keywords">gemini / Agent 持久记忆</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 3.2k</span>
+                <span class="metric">Fork 470</span>
+                <span class="language-tag lang-jupyter-notebook">Jupyter Notebook</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/supermemoryai/supermemory">supermemoryai/supermemory</a>
-              /（Developer Runtime &amp; 企业知识库增强）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/supermemoryai/supermemory">supermemoryai/supermemory</a>
+              <div class="repo-keywords">Developer Runtime / 企业知识库增强</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 23.5k</span>
+                <span class="metric">Fork 2.1k</span>
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
             </li>
           </ol>
         </div>
@@ -306,64 +429,94 @@
           <h3>周度</h3>
           <ol>
             <li>
-              <a href="https://github.com/harry0703/MoneyPrinterTurbo">harry0703/MoneyPrinterTurbo</a>
-              /（Agent-Native CLI &amp; 内容生产自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/harry0703/MoneyPrinterTurbo">harry0703/MoneyPrinterTurbo</a>
+              <div class="repo-keywords">Agent-Native CLI / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 75.5k</span>
+                <span class="metric">Fork 10.7k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a>
-              /（Coding Agent Runtime &amp; 企业知识库增强）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a>
+              <div class="repo-keywords">Coding Agent Runtime / 企业知识库增强</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 47.8k</span>
+                <span class="metric">Fork 3.9k</span>
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/anthropics/knowledge-work-plugins">anthropics/knowledge-work-plugins</a>
-              /（Plugin Directory &amp; 技能市场治理）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/anthropics/knowledge-work-plugins">anthropics/knowledge-work-plugins</a>
+              <div class="repo-keywords">Plugin Directory / 技能市场治理</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 18.5k</span>
+                <span class="metric">Fork 2.2k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/rohitg00/ai-engineering-from-scratch">rohitg00/ai-engineering-from-scratch</a>
-              /（Coding Agent Runtime &amp; 内容生产自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/rohitg00/ai-engineering-from-scratch">rohitg00/ai-engineering-from-scratch</a>
+              <div class="repo-keywords">Coding Agent Runtime / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 26.2k</span>
+                <span class="metric">Fork 4.3k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/hardikpandya/stop-slop">hardikpandya/stop-slop</a>
-              /（Agent-Native CLI &amp; 企业知识库增强）
-              / <span class="badge rel-medium">可观察</span>
-              / <span class="badge conf-low">证据不足</span>
+              <a class="repo-title" href="https://github.com/hardikpandya/stop-slop">hardikpandya/stop-slop</a>
+              <div class="repo-keywords">Agent-Native CLI / 企业知识库增强</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 7.8k</span>
+                <span class="metric">Fork 558</span>
+                <span class="language-tag lang-other">未标注</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/microsoft/markitdown">microsoft/markitdown</a>
-              /（Plugin Directory &amp; 内容生产自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/microsoft/markitdown">microsoft/markitdown</a>
+              <div class="repo-keywords">Plugin Directory / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 136k</span>
+                <span class="metric">Fork 9.3k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/Leonxlnx/taste-skill">Leonxlnx/taste-skill</a>
-              /（Coding Agent Runtime &amp; 技能市场治理）
-              / <span class="badge rel-medium">可观察</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/Leonxlnx/taste-skill">Leonxlnx/taste-skill</a>
+              <div class="repo-keywords">Coding Agent Runtime / 技能市场治理</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 30.2k</span>
+                <span class="metric">Fork 2.2k</span>
+                <span class="language-tag lang-shell">Shell</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a>
-              /（Coding Agent Runtime &amp; 企业知识库增强）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a>
+              <div class="repo-keywords">Coding Agent Runtime / 企业知识库增强</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 35.9k</span>
+                <span class="metric">Fork 2.2k</span>
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills">mukul975/Anthropic-Cybersecurity-Skills</a>
-              /（Coding Agent Runtime &amp; 技能市场治理）
-              / <span class="badge rel-low">低相关</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills">mukul975/Anthropic-Cybersecurity-Skills</a>
+              <div class="repo-keywords">Coding Agent Runtime / 技能市场治理</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 13k</span>
+                <span class="metric">Fork 1.5k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/affaan-m/ECC">affaan-m/ECC</a>
-              /（Coding Agent Runtime &amp; 技能市场治理）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/affaan-m/ECC">affaan-m/ECC</a>
+              <div class="repo-keywords">Coding Agent Runtime / 技能市场治理</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 201.1k</span>
+                <span class="metric">Fork 30.9k</span>
+                <span class="language-tag lang-javascript">JavaScript</span>
+              </div>
             </li>
           </ol>
         </div>
@@ -371,64 +524,94 @@
           <h3>月度</h3>
           <ol>
             <li>
-              <a href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a>
-              /（Coding Agent Runtime &amp; 企业知识库增强）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/colbymchenry/codegraph">colbymchenry/codegraph</a>
+              <div class="repo-keywords">Coding Agent Runtime / 企业知识库增强</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 35.9k</span>
+                <span class="metric">Fork 2.2k</span>
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/anthropics/financial-services">anthropics/financial-services</a>
-              /（Domain Agent Template &amp; 工具调用编排）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/anthropics/financial-services">anthropics/financial-services</a>
+              <div class="repo-keywords">Domain Agent Template / 工具调用编排</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 29.2k</span>
+                <span class="metric">Fork 4.1k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/CloakHQ/CloakBrowser">CloakHQ/CloakBrowser</a>
-              /（Browser Automation &amp; 浏览器自动化风险评估）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/CloakHQ/CloakBrowser">CloakHQ/CloakBrowser</a>
+              <div class="repo-keywords">Browser Automation / 浏览器自动化风险评估</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 23k</span>
+                <span class="metric">Fork 1.8k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/rohitg00/agentmemory">rohitg00/agentmemory</a>
-              /（Coding Agent Runtime &amp; Agent 持久记忆）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/rohitg00/agentmemory">rohitg00/agentmemory</a>
+              <div class="repo-keywords">Coding Agent Runtime / Agent 持久记忆</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 20.3k</span>
+                <span class="metric">Fork 1.7k</span>
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a>
-              /（Coding Agent Runtime &amp; 企业知识库增强）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/Lum1104/Understand-Anything">Lum1104/Understand-Anything</a>
+              <div class="repo-keywords">Coding Agent Runtime / 企业知识库增强</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 47.8k</span>
+                <span class="metric">Fork 3.9k</span>
+                <span class="language-tag lang-typescript">TypeScript</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/Imbad0202/academic-research-skills">Imbad0202/academic-research-skills</a>
-              /（Coding Agent Runtime &amp; 技能市场治理）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/Imbad0202/academic-research-skills">Imbad0202/academic-research-skills</a>
+              <div class="repo-keywords">Coding Agent Runtime / 技能市场治理</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 25.3k</span>
+                <span class="metric">Fork 2.1k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/HKUDS/ViMax">HKUDS/ViMax</a>
-              /（Content Automation Pipeline &amp; 内容生产自动化）
-              / <span class="badge rel-medium">可观察</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/HKUDS/ViMax">HKUDS/ViMax</a>
+              <div class="repo-keywords">Content Automation Pipeline / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 8.5k</span>
+                <span class="metric">Fork 1.3k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/mattpocock/skills">mattpocock/skills</a>
-              /（Skill Pack &amp; 内容生产自动化）
-              / <span class="badge rel-medium">可观察</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/mattpocock/skills">mattpocock/skills</a>
+              <div class="repo-keywords">Skill Pack / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 113.5k</span>
+                <span class="metric">Fork 9.9k</span>
+                <span class="language-tag lang-shell">Shell</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/rohitg00/ai-engineering-from-scratch">rohitg00/ai-engineering-from-scratch</a>
-              /（Coding Agent Runtime &amp; 内容生产自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-medium">证据一般</span>
+              <a class="repo-title" href="https://github.com/rohitg00/ai-engineering-from-scratch">rohitg00/ai-engineering-from-scratch</a>
+              <div class="repo-keywords">Coding Agent Runtime / 内容生产自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 26.2k</span>
+                <span class="metric">Fork 4.3k</span>
+                <span class="language-tag lang-python">Python</span>
+              </div>
             </li>
             <li>
-              <a href="https://github.com/decolua/9router">decolua/9router</a>
-              /（Coding Agent Runtime &amp; 需求-测试-上线自动化）
-              / <span class="badge rel-high">高相关</span>
-              / <span class="badge conf-high">证据充分</span>
+              <a class="repo-title" href="https://github.com/decolua/9router">decolua/9router</a>
+              <div class="repo-keywords">Coding Agent Runtime / 需求-测试-上线自动化</div>
+              <div class="repo-metrics">
+                <span class="metric">★ 15.5k</span>
+                <span class="metric">Fork 2.3k</span>
+                <span class="language-tag lang-javascript">JavaScript</span>
+              </div>
             </li>
           </ol>
         </div>
@@ -550,64 +733,9 @@
     </section>
 
     <section class="section">
-      <h2>跨榜单稳定性分析</h2>
-      <p class="muted">daily+weekly = 短期升温；weekly+monthly = 持续趋势；daily+weekly+monthly = 稳定趋势；monthly only = 长尾热度。</p>
-      <div class="mini-matrix">
-        <div class="card">
-          <h3>Lum1104/Understand-Anything</h3>
-          <p><span class="badge rel-medium">持续趋势</span> 周度 + 月度</p>
-        </div>
-        <div class="card">
-          <h3>colbymchenry/codegraph</h3>
-          <p><span class="badge rel-medium">持续趋势</span> 周度 + 月度</p>
-        </div>
-        <div class="card">
-          <h3>harry0703/MoneyPrinterTurbo</h3>
-          <p><span class="badge rel-medium">短期升温</span> 今日 + 周度</p>
-        </div>
-        <div class="card">
-          <h3>microsoft/markitdown</h3>
-          <p><span class="badge rel-medium">短期升温</span> 今日 + 周度</p>
-        </div>
-        <div class="card">
-          <h3>rohitg00/ai-engineering-from-scratch</h3>
-          <p><span class="badge rel-medium">持续趋势</span> 周度 + 月度</p>
-        </div>
-        <div class="card">
-          <h3>CloakHQ/CloakBrowser</h3>
-          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
-        </div>
-        <div class="card">
-          <h3>HKUDS/ViMax</h3>
-          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
-        </div>
-        <div class="card">
-          <h3>Imbad0202/academic-research-skills</h3>
-          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
-        </div>
-        <div class="card">
-          <h3>anthropics/financial-services</h3>
-          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
-        </div>
-        <div class="card">
-          <h3>decolua/9router</h3>
-          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
-        </div>
-        <div class="card">
-          <h3>mattpocock/skills</h3>
-          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
-        </div>
-        <div class="card">
-          <h3>rohitg00/agentmemory</h3>
-          <p><span class="badge rel-medium">长尾热度</span> 月度</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
       <h2>历史趋势</h2>
-      <h3>编码代理运行时</h3>
-      <p>趋势判断：历史与当前关键词重叠，Coding Agent Runtime与CLI持续受关注。持久仓库包含plugin，但无新高相关性仓库。</p>
+      <h3>智能体运行时</h3>
+      <p>核心词跨期重叠，含plugin的持久仓库稳定。趋势判断：Agent运行时与CLI平稳，适合继续观察。因无新增高相关仓库，需要更多样本。</p>
     </section>
 
   </main>
