@@ -5,24 +5,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI Lab Daily Radar Archive</title>
   <style>
-    body { margin: 0; background: #f4f6f8; color: #14212b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; line-height: 1.6; }
-    main { max-width: 860px; margin: 0 auto; padding: 32px 18px 56px; }
-    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.2; }
-    p { margin: 0 0 22px; color: #607080; }
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --ink: #14212b;
+      --muted: #607080;
+      --line: #dbe3ea;
+      --green: #0f766e;
+      --blue: #2563eb;
+      --soft-green: #dff5ef;
+      --soft-blue: #e8f0ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(37, 99, 235, .12), transparent 30%),
+        radial-gradient(circle at 88% 4%, rgba(15, 118, 110, .14), transparent 28%),
+        var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+    }
+    main { max-width: 940px; margin: 0 auto; padding: 38px 18px 64px; }
+    .hero {
+      border: 1px solid rgba(219, 227, 234, .95);
+      border-radius: 8px;
+      background: linear-gradient(135deg, #102a43, #0f766e);
+      color: #fff;
+      padding: 26px 24px;
+      box-shadow: 0 16px 44px rgba(20, 33, 43, .10);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: #dbeafe;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #5bc8b8;
+      box-shadow: 0 0 0 4px rgba(91, 200, 184, .18);
+    }
+    h1 { margin: 0; font-size: 32px; line-height: 1.18; }
+    p { margin: 10px 0 0; max-width: 680px; color: #dbeafe; }
+    .archive-panel {
+      margin-top: 18px;
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 10px 28px rgba(20, 33, 43, .06);
+    }
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .panel-title strong { color: var(--ink); font-size: 16px; }
     ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-    li { background: #fff; border: 1px solid #dbe3ea; border-radius: 8px; padding: 13px 15px; }
-    a { color: #0f766e; font-weight: 700; text-decoration: none; }
-    .empty { color: #607080; }
-    @media (max-width: 560px) { main { padding: 24px 12px 40px; } h1 { font-size: 24px; } }
+    .archive-card { margin: 0; }
+    .archive-link {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      min-height: 66px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .16s ease, transform .16s ease, box-shadow .16s ease;
+    }
+    .archive-link:hover {
+      border-color: rgba(15, 118, 110, .46);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(20, 33, 43, .08);
+    }
+    .archive-date { font-size: 20px; font-weight: 800; color: var(--ink); }
+    .archive-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; }
+    .archive-pill {
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--blue);
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .archive-action {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .empty { color: var(--muted); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+    @media (max-width: 560px) {
+      main { padding: 24px 12px 42px; }
+      .hero { padding: 22px 18px; }
+      h1 { font-size: 25px; }
+      .archive-panel { padding: 12px; }
+      .panel-title { display: block; }
+      .archive-link { grid-template-columns: 1fr; gap: 8px; }
+      .archive-meta { justify-content: flex-start; }
+    }
   </style>
 </head>
 <body>
   <main>
-    <h1>AI Lab Daily Radar Archive</h1>
-    <p>往期 GitHub Trending 技术雷达报告，按生成日期倒序排列。</p>
-    <ul>
-        <li><a href="2026-06-02/">2026-06-02</a></li>
-    </ul>
+    <section class="hero">
+      <div class="eyebrow">GitHub Trending Radar</div>
+      <h1>AI Lab Daily Radar Archive</h1>
+      <p>往期 GitHub Trending 技术雷达报告，按生成日期倒序排列。</p>
+    </section>
+    <section class="archive-panel" aria-label="往期报告列表">
+      <div class="panel-title">
+        <strong>往期报告</strong>
+        <span>HTML archive</span>
+      </div>
+      <ul>
+        <li class="archive-card">
+          <a class="archive-link" href="2026-06-02/">
+            <span class="archive-date">2026-06-02</span>
+            <span class="archive-meta">
+              <span class="archive-pill">HTML Report</span>
+              <span class="archive-action">打开报告 -&gt;</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
   </main>
 </body>
 </html>
