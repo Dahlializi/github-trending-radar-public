@@ -6,29 +6,29 @@
   <title>AI Lab Daily Radar Archive</title>
   <style>
     :root {
-      --bg: #06070A;
-      --bg-elev: #0B0D11;
-      --panel: #0E1116;
-      --panel-hover: #11151B;
-      --border: #1A1F26;
-      --border-strong: #242A33;
-      --text-1: #E8EAED;
-      --text-2: #9CA3AF;
-      --text-3: #5C636E;
-      --accent: #22D3EE;
-      --accent-dim: rgba(34, 211, 238, .14);
-      --accent-glow: rgba(34, 211, 238, .35);
-      --pos: #34D399;
+      --bg: #F5F7FB;
+      --bg-elev: #FFFFFF;
+      --panel: #FFFFFF;
+      --panel-hover: #FAFBFE;
+      --border: #E7EBF2;
+      --border-strong: #D9DFEA;
+      --text-1: #111A2E;
+      --text-2: #46506A;
+      --text-3: #727D96;
+      --accent: #3257E0;
+      --accent-dim: rgba(50, 87, 224, .14);
+      --accent-glow: rgba(50, 87, 224, .22);
+      --pos: #0E9F6E;
     }
     * { box-sizing: border-box; }
     html { background: var(--bg); }
     body {
       margin: 0;
       background:
-        radial-gradient(ellipse at 20% 0%, rgba(34, 211, 238, .055), transparent 45%),
-        radial-gradient(ellipse at 100% 100%, rgba(52, 211, 153, .035), transparent 48%),
-        linear-gradient(to right, rgba(255,255,255,.014) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,.014) 1px, transparent 1px),
+        radial-gradient(ellipse at 20% 0%, rgba(50, 87, 224, .055), transparent 45%),
+        radial-gradient(ellipse at 100% 100%, rgba(14, 159, 110, .035), transparent 48%),
+        linear-gradient(to right, rgba(17,26,46,.032) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(17,26,46,.032) 1px, transparent 1px),
         var(--bg);
       background-size: auto, auto, 80px 80px, 80px 80px, auto;
       color: var(--text-1);
@@ -39,14 +39,14 @@
     }
     main { max-width: 1040px; margin: 0 auto; padding: 38px 20px 64px; }
     .hero {
-      border: 1px solid rgba(34, 211, 238, .24);
+      border: 1px solid rgba(50, 87, 224, .22);
       border-radius: 6px;
       background:
-        linear-gradient(180deg, rgba(34, 211, 238, .08), rgba(34, 211, 238, .018)),
+        linear-gradient(180deg, rgba(50, 87, 224, .08), rgba(50, 87, 224, .018)),
         var(--bg-elev);
       color: var(--text-1);
       padding: 26px 24px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 20px 48px rgba(0,0,0,.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.72), 0 20px 48px rgba(16,24,43,.10);
     }
     .eyebrow {
       display: inline-flex;
@@ -74,7 +74,7 @@
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 16px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.72);
     }
     .panel-title {
       display: flex;
@@ -104,22 +104,22 @@
     }
     .archive-link:hover {
       background: var(--panel-hover);
-      border-color: rgba(34, 211, 238, .42);
+      border-color: rgba(50, 87, 224, .34);
       transform: translateY(-1px);
-      box-shadow: 0 0 22px rgba(34, 211, 238, .08);
+      box-shadow: 0 0 22px rgba(50, 87, 224, .08);
     }
     .archive-date { font-size: 20px; font-weight: 720; color: var(--text-1); font-variant-numeric: tabular-nums; }
     .archive-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; }
     .today-pill {
       border-radius: 999px;
       background: rgba(255, 255, 255, .10);
-      border: 1px solid rgba(226, 232, 240, .46);
-      color: #e5edf5;
+      border: 1px solid rgba(50, 87, 224, .24);
+      color: var(--accent);
       padding: 4px 9px;
       font-size: 12px;
       font-weight: 800;
       white-space: nowrap;
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, .06) inset, 0 0 14px rgba(226, 232, 240, .20);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, .72) inset, 0 0 14px rgba(50, 87, 224, .12);
       backdrop-filter: blur(6px);
     }
     .archive-action {
